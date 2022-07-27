@@ -1,0 +1,3 @@
+LostWar_TeamProject/Assets/03.Models/Ch15_nonPBR.fbx filter=lfs diff=lfs merge=lfs -text
+LostWar_TeamProject/Assets/03.Models/PostApo/Texture/DebrisPlane.tif filter=lfs diff=lfs merge=lfs -text
+Debris[[:space:]]Plane.tif filter=lfs diff=lfs merge=lfs -text
