@@ -56,6 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\00.JH\Scripts\AimBehaviourBasic.cs" />
+    <Compile Include="Assets\00.JH\Scripts\BasicBehaviour.cs" />
+    <Compile Include="Assets\00.JH\Scripts\EquipItem.cs" />
+    <Compile Include="Assets\00.JH\Scripts\GameDataObject.cs" />
+    <Compile Include="Assets\00.JH\Scripts\GameManager.cs" />
+    <Compile Include="Assets\00.JH\Scripts\Item.cs" />
+    <Compile Include="Assets\00.JH\Scripts\ItemList.cs" />
+    <Compile Include="Assets\00.JH\Scripts\LivingEntity.cs" />
+    <Compile Include="Assets\00.JH\Scripts\MoveBehaviour.cs" />
+    <Compile Include="Assets\00.JH\Scripts\RayShoot.cs" />
+    <Compile Include="Assets\00.JH\Scripts\SimpleShoot.cs" />
+    <Compile Include="Assets\00.JH\Scripts\SwordAttack.cs" />
+    <Compile Include="Assets\00.JH\Scripts\ThirdPersonOrbitCamBasic.cs" />
     <Compile Include="Assets\02.Scripts\Common\GoToNextLevel.cs" />
     <Compile Include="Assets\02.Scripts\Common\IInteraction.cs" />
     <Compile Include="Assets\02.Scripts\Common\Inventory.cs" />
@@ -69,7 +82,6 @@
     <Compile Include="Assets\02.Scripts\Common\TalkingQuest\QuestGoal.cs" />
     <Compile Include="Assets\02.Scripts\Common\TalkingQuest\QuestManager.cs" />
     <Compile Include="Assets\02.Scripts\Common\TalkingQuest\TalkManager.cs" />
-    <Compile Include="Assets\02.Scripts\Common\ThirdPersonOrbitCamBasic.cs" />
     <Compile Include="Assets\02.Scripts\Common\UIManager.cs" />
     <Compile Include="Assets\02.Scripts\Lv1\ItemBox.cs" />
     <Compile Include="Assets\02.Scripts\Lv1\Lv1_Door.cs" />
@@ -100,8 +112,10 @@
     <Compile Include="Assets\08.Effect\TutorialInfo\Scripts\Readme.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\00.JH\Models\Modern Guns - Handgun\README.txt" />
     <None Include="Assets\03.Models\DirtyApartments\_materials\DoubleSided.shader" />
     <None Include="Assets\08.Effect\Shared\Shaders\SurfaceShader_VC.shader" />
+    <None Include="Assets\00.JH\Models\Colt Python\Read_me.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

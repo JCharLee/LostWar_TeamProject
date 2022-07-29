@@ -89,7 +89,7 @@ public class PlayerInteraction : MonoBehaviour
             Destroy(gameObject);
         DontDestroyOnLoad(this.gameObject);
 
-        interactionPoint = transform.GetChild(2).GetComponent<Transform>();
+        interactionPoint = transform.GetChild(0).GetComponent<Transform>();
 
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();

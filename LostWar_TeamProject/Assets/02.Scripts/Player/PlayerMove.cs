@@ -5,99 +5,32 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] Transform tr;
-    [SerializeField] Animator ani;
+    [SerializeField] Animator anim;
     [SerializeField] Rigidbody rb;
 
     private float h, v;
-    private float moveSpeed = 5f;
-    private float jumpForce = 5f;
+    private float moveSpeed = 3.0f;
 
-    private readonly int hashMoveV = Animator.StringToHash("SpeedY");
-    private readonly int hashMoveH = Animator.StringToHash("SpeedX");
+    private readonly int hashSpeedX = Animator.StringToHash("SpeedX");
+    private readonly int hashSpeedY = Animator.StringToHash("SpeedY");
 
-    private bool isJump = false;
 
-    void Start()
+    private void Awake()
     {
         tr = GetComponent<Transform>();
-        ani = GetComponent<Animator>();
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-
-        //Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void OnCollisionEnter(Collision col)
-    {
-        isJump = false;
-    }
-
-    private void OnCollisionExit(Collision col)
-    {
-        isJump = true;
-    }
-
-    void Update()
+    private void Update()
     {
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
+        anim.SetFloat(hashSpeedX, h);
+        anim.SetFloat(hashSpeedY, v);
+
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
-
-        Move(moveDir);
-        Jump();
-        Run();
-    }
-
-    private void Run()
-    {
-        UIManager uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        if (uiManager.isAction == true) return;
-        QuestManager questManager = FindObjectOfType<QuestManager>();
-        if (questManager.IsStarting == true) return;
-        if (SceneLoader.isLoading == true) return;
-
-        if (Input.GetKey(KeyCode.LeftShift))
-            moveSpeed = 10f;
-        else
-            moveSpeed = 5f;
-    }
-
-    private void Jump()
-    {
-        UIManager uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        if (uiManager.isAction == true) return;
-        QuestManager questManager = FindObjectOfType<QuestManager>();
-        if (questManager.IsStarting == true) return;
-        if (SceneLoader.isLoading == true) return;
-
-        if (Input.GetKeyDown(KeyCode.Space) && isJump == false)
-        {
-            rb.velocity = Vector3.up * jumpForce;
-            ani.SetTrigger("Jump");
-        }
-    }
-
-    private void Move(Vector3 moveDir)
-    {
-        UIManager uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        if (uiManager.isAction == true) return;
-        QuestManager questManager = FindObjectOfType<QuestManager>();
-        if (questManager.IsStarting == true) return;
-        if (SceneLoader.isLoading == true) return;
-
         tr.Translate(moveDir.normalized * moveSpeed * Time.deltaTime);
-
-        if (ani)
-        {
-            ani.SetFloat(hashMoveV, v);
-            ani.SetFloat(hashMoveH, h);
-            if (rb)
-            {
-                Vector3 speed = rb.velocity;
-                speed.z = v;
-                speed.x = h;
-                rb.velocity = speed;
-            }
-        }
     }
 }

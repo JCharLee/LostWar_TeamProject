@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
         questPanel = transform.GetChild(5).gameObject;
         titleText = questPanel.transform.GetChild(0).GetComponent<Text>();
         contentsText = questPanel.transform.GetChild(1).GetComponentInChildren<Text>();
-        questGiver = GameObject.FindGameObjectWithTag("Player").transform.GetChild(3).gameObject;
+        questGiver = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
 
         talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
