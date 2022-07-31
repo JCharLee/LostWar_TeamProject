@@ -23,18 +23,21 @@ public class GameDataObject : ScriptableObject
                 exp -= Exp_require;// 요구치 만큼 경험치 값을 뺀다
                 Level++;// 레벨이 오른다
                 Exp_require *= 1.2f;// 요구치가 1.2배 증가한다
-                GameManager.instance.UpdateLevel(Level);// 게임 매니저의 레벨 업데이트 함수 실행
+                UIManager.instance.UpdateLevel(Level);// 게임 매니저의 레벨 업데이트 함수 실행
             }
         }
     }
     public float Exp_require { get; set; } = 10f;// 경험치 요구치
     public int Str { get; set; }// 힘 스탯
+    public int Agi { get; set; }// 민첩 스탯
     public int Con { get; set; }// 컨디션 스탯
     public int Vit{ get; set; }// 바이탈 스탯
     public int Status_max { get; } = 30;// 스탯 맥스치
     public int Status_own { get; set; } = 7;// 현재 스탯
-    public float MaxHp { get; set; } = 100;// 최대 체력
-    public float Hp { get; set; } = 100;// 현재 체력
+    public float MaxHp { get; set; } = 1000;// 최대 체력
+    public float Hp { get; set; } = 1000;// 현재 체력
+    public float MaxSp { get; set; } = 100;// 최대 기력
+    public float Sp { get; set; } = 100;// 현재 기력
     public float Dam { get; set; } = 5;// 데미지
     public float Weight { get; set; } = 0;// 무게 스탯
     public float Max_weight { get; } = 100;// 최대 무게치

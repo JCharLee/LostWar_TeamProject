@@ -27,12 +27,12 @@ public class GameManager : MonoBehaviour
     public CanvasGroup get_F;
     private List<GameObject> list_inventory;//일괄 destroy를 위한 리스트
     private MoveBehaviour moveBehaviour;// 플레이어 움직임
-    [Header("Player Status in Inventory")]// 인벤토리 창의 스탯 표기
+    [Header("Player Status in Inventory")]// 인벤토리 창의 아이템 스탯 표기
     public Text str_I;
     public Text con_I;
     public Text vit_I;
     public Text dd_I;
-    [Header("Player Status in Status")]// 스테이터스 창의 스탯 표기
+    [Header("Player Status in Status")]// 스테이터스 창의 플레이어 스탯 표기
     public Text level_S;
     public Text str_S;
     public Text con_S;

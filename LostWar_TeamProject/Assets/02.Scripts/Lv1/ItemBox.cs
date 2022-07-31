@@ -1,24 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ItemSpace;
 
-public class ItemBox : MonoBehaviour, IInteraction
+public class ItemBox : DropItem, IInteraction
 {
     private float castTime = 3f;
 
     [SerializeField] string prompt;
 
     private UIManager uiManager;
-    private GameObject questGiver;
 
     public string interactionPrompt => prompt;
 
     void Start()
     {
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        questGiver = GameObject.FindGameObjectWithTag("Player").transform.GetChild(3).gameObject;
 
         prompt = "[F] 상자 열기";
+        InitItem();
+    }
+
+    private void Update()
+    {
+        if (items[0] == null && items[1] == null && items[2] == null)
+        {
+            gameObject.layer = 0;
+            GameObject.FindGameObjectWithTag("Player").transform.GetChild(9).gameObject.SetActive(true);
+            uiManager.CloseDropPanel();
+            return;
+        }
     }
 
     public bool Action(PlayerInteraction interactor)
@@ -31,7 +42,14 @@ public class ItemBox : MonoBehaviour, IInteraction
     {
         StartCoroutine(uiManager.InteractionCasting(castTime));
         yield return new WaitForSeconds(castTime);
+        uiManager.OpenDropPanel(this);
         Debug.Log("Item box open!");
-        this.gameObject.layer = 0;
+    }
+
+    public override void InitItem()
+    {
+        items[0] = ItemList.instance.Get("Sword");
+        items[1] = ItemList.instance.Get("Pistol");
+        items[2] = null;
     }
 }

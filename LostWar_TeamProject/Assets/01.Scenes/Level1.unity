@@ -37181,6 +37181,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e0ea9b6cc5cedb4a98d15e215e679b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  items:
+  - name: 
+    str: 0
+    agi: 0
+    con: 0
+    vit: 0
+    num: 0
+    img: {fileID: 0}
+    weight: 0
+    durability: 0
+    itemType: 0
+  - name: 
+    str: 0
+    agi: 0
+    con: 0
+    vit: 0
+    num: 0
+    img: {fileID: 0}
+    weight: 0
+    durability: 0
+    itemType: 0
+  - name: 
+    str: 0
+    agi: 0
+    con: 0
+    vit: 0
+    num: 0
+    img: {fileID: 0}
+    weight: 0
+    durability: 0
+    itemType: 0
   prompt: 
 --- !u!65 &2046493759
 BoxCollider:
@@ -39318,6 +39349,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4240581291843768593, guid: ad64ff01074299d4b93e8ea2f78a72f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5927938195185859811, guid: ad64ff01074299d4b93e8ea2f78a72f3,
         type: 3}
       propertyPath: m_Name

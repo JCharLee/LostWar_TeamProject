@@ -108,7 +108,7 @@ public class PlayerInteraction : MonoBehaviour
                 if (!uiManager.onIcon)
                     uiManager.InteractionIconOn(interactable.interactionPrompt);
 
-                if (uiManager.casting || uiManager.isAction)
+                if (uiManager.casting || uiManager.isAction || uiManager.dropOn)
                     uiManager.InteractionIconOff();
 
                 if (Input.GetKeyDown(KeyCode.F))
@@ -123,13 +123,6 @@ public class PlayerInteraction : MonoBehaviour
             if (uiManager.onIcon)
                 uiManager.InteractionIconOff();
         }
-    }
-
-    public void OnClickQuest()
-    {
-        uiManager.goQuest = true;
-        uiManager.talkIndex = 0;
-        interactable.Action(this);
     }
 
     private void OnDrawGizmos()
