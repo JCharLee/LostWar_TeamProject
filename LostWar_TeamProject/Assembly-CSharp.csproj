@@ -72,8 +72,9 @@
     <Compile Include="Assets\02.Scripts\Common\GetDropItem.cs" />
     <Compile Include="Assets\02.Scripts\Common\GoToNextLevel.cs" />
     <Compile Include="Assets\02.Scripts\Common\IInteraction.cs" />
-    <Compile Include="Assets\02.Scripts\Common\Inventory.cs" />
+    <Compile Include="Assets\02.Scripts\Common\LookAtCamera.cs" />
     <Compile Include="Assets\02.Scripts\Common\MyGizmos.cs" />
+    <Compile Include="Assets\02.Scripts\Common\Quest\Locator.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\QuestData.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\QuestGiver.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\QuestGoal.cs" />
@@ -88,7 +89,6 @@
     <Compile Include="Assets\02.Scripts\Lv1\ItemBox.cs" />
     <Compile Include="Assets\02.Scripts\Lv1\Lv1_Door.cs" />
     <Compile Include="Assets\02.Scripts\Lv1\SecretWall.cs" />
-    <Compile Include="Assets\02.Scripts\Lv2\NPC\EscortedNPC.cs" />
     <Compile Include="Assets\02.Scripts\Lv2\NPC\NPCObject.cs" />
     <Compile Include="Assets\02.Scripts\Lv3\Elevator.cs" />
     <Compile Include="Assets\02.Scripts\Lv3\ElevatorDoor.cs" />

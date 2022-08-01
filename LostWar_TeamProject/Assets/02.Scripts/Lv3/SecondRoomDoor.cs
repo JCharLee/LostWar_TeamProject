@@ -19,16 +19,16 @@ public class SecondRoomDoor : Lv3_Door
         speed = 5f;
         prompt = "[F] 문 열기";
         base.Start();
-        cautionText = "카드키를 구해야 합니다.";
+        cautionText = "첫 번째 카드키를 먼저 구해야 합니다.";
     }
 
     public override bool Action(PlayerInteraction interactor)
     {
-        var inventory = interactor.GetComponent<Inventory>();
+        var inventory = interactor.GetComponent<PlayerInteraction>();
 
         if (inventory == null) return false;
 
-        if (inventory.hasKey)
+        if (inventory.hasKey1)
         {
             return base.Action(interactor);
         }

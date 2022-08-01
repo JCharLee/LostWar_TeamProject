@@ -13,7 +13,7 @@ public class StartPoint : MonoBehaviour
         if (startPoint == thePlayer.currentMapName)
         {
             thePlayer.transform.position = transform.position;
-            thePlayer.transform.rotation = Quaternion.identity;
+            thePlayer.transform.rotation = transform.rotation;
         }
     }
 }

@@ -7,6 +7,8 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] Transform interactionPoint;
     [SerializeField] float pointRadius = 1f;
     [SerializeField] LayerMask interactableMask;
+    public bool hasKey1 = false;
+    public bool hasKey2 = false;
 
     private readonly Collider[] cols = new Collider[3];
     [SerializeField] int numFound;

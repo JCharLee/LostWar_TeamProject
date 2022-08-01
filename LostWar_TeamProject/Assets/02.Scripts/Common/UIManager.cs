@@ -157,6 +157,9 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        if (questListPanel.transform.childCount == 0)
+            questListPanel.SetActive(false);
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             AllUiClose();
