@@ -44,8 +44,6 @@ public class SimpleShoot : MonoBehaviour
     //This function creates the bullet behavior
     void Shoot()
     {
-        if(GameManager.instance.isPaused)
-        return;
         if (muzzleFlashPrefab)
         {
             //Create the muzzle flash

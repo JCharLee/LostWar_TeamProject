@@ -22,9 +22,9 @@ public class SlotItemInfo : MonoBehaviour, IPointerClickHandler
         if ((Time.time - clickTime) < 0.25f)
         {
             if (!isEquip)
-                UIManager.instance.OnDoubleClickEquip();
+                GameManager.instance.OnDoubleClickEquip();
             else
-                UIManager.instance.OnDoubleClickEquipOff();
+                GameManager.instance.OnDoubleClickEquipOff();
         }
         else
             clickTime = Time.time;

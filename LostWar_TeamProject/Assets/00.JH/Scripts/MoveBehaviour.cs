@@ -31,7 +31,6 @@ public class MoveBehaviour : GenericBehaviour
 	[SerializeField]private GameObject cur_long_weapon = null;
 
 	[SerializeField]private RayShoot rayShoot;
-	public Image[] weaponImage = new Image[2];
 	//public GameObject curweapon;
 	
 	
@@ -87,8 +86,6 @@ public class MoveBehaviour : GenericBehaviour
 			ani.SetBool("HaveSword", false);
 			ani.SetBool("HavePistol", true);
 			rayShoot.enabled = true;
-			weaponImage[0].enabled = true;
-			weaponImage[1].enabled = false;
 		}
 		if (Input.GetKeyDown(KeyCode.Alpha2) && !haveMotion)//근접 무기
 		{
@@ -100,8 +97,6 @@ public class MoveBehaviour : GenericBehaviour
 			ani.SetBool("HavePistol", false);
 			ani.SetBool("HaveSword", true);
 			rayShoot.enabled = false;
-			weaponImage[0].enabled = false;
-			weaponImage[1].enabled = true;
 		}
 		
 		if (Input.GetKeyDown(KeyCode.Tab))
@@ -112,9 +107,7 @@ public class MoveBehaviour : GenericBehaviour
 			cur_long_weapon.SetActive(false);
 			ani.SetBool("HaveSword", false);
 			ani.SetBool("HavePistol", false);
-			rayShoot.enabled = false; 
-			weaponImage[0].enabled = false;
-			weaponImage[1].enabled = false;
+			rayShoot.enabled = false;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space)&&!rolling)

@@ -58,9 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\00.JH\Scripts\AimBehaviourBasic.cs" />
     <Compile Include="Assets\00.JH\Scripts\BasicBehaviour.cs" />
-    <Compile Include="Assets\00.JH\Scripts\EquipItem.cs" />
     <Compile Include="Assets\00.JH\Scripts\GameDataObject.cs" />
-    <Compile Include="Assets\00.JH\Scripts\GameManager.cs" />
     <Compile Include="Assets\00.JH\Scripts\Item.cs" />
     <Compile Include="Assets\00.JH\Scripts\ItemList.cs" />
     <Compile Include="Assets\00.JH\Scripts\LivingEntity.cs" />
@@ -70,6 +68,7 @@
     <Compile Include="Assets\00.JH\Scripts\SwordAttack.cs" />
     <Compile Include="Assets\00.JH\Scripts\ThirdPersonOrbitCamBasic.cs" />
     <Compile Include="Assets\02.Scripts\Common\DropItem.cs" />
+    <Compile Include="Assets\02.Scripts\Common\GameManager.cs" />
     <Compile Include="Assets\02.Scripts\Common\GetDropItem.cs" />
     <Compile Include="Assets\02.Scripts\Common\GoToNextLevel.cs" />
     <Compile Include="Assets\02.Scripts\Common\IInteraction.cs" />
@@ -112,7 +111,6 @@
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleMenu.cs" />
-    <Compile Include="Assets\08.Effect\TutorialInfo\Scripts\Readme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\00.JH\Models\Modern Guns - Handgun\README.txt" />

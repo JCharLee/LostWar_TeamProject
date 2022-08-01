@@ -62,17 +62,6 @@ public class UIManager : MonoBehaviour
 
     [Header("[Inventory]")]
     [SerializeField] private GameObject inventoryPanel;
-    [SerializeField] private Transform[] itemSlots;
-    [SerializeField] private Transform equiped_shortWeapon;
-    [SerializeField] private Transform equiped_longWeapon;
-    [SerializeField] private Transform equiped_shoes;
-    [SerializeField] private Transform equiped_top;
-    [SerializeField] private Transform equiped_bottoms;
-    private GameObject shortWeapon_C;
-    private GameObject longWeapon_C;
-    private GameObject shoes_C;
-    private GameObject top_C;
-    private GameObject bottoms_C;
     [SerializeField] private Text itemInfoText;
     [SerializeField] private Image itemInfoImage;
     [SerializeField] private Text str;
@@ -83,9 +72,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text def;
     [SerializeField] private Text hp;
     [SerializeField] private Text sp;
-    private List<GameObject> list_inventory = new List<GameObject>();
     private bool inventoryOn = false;
-    private float clickTime = 0;
 
     public Coroutine castRoutine;
 
@@ -134,12 +121,6 @@ public class UIManager : MonoBehaviour
         dropPanel = transform.GetChild(8).gameObject;
 
         inventoryPanel = transform.GetChild(7).gameObject;
-        itemSlots = inventoryPanel.transform.GetChild(2).GetComponentsInChildren<Transform>();
-        equiped_top = inventoryPanel.transform.GetChild(1).transform.GetChild(1).GetComponent<Transform>();
-        equiped_bottoms = inventoryPanel.transform.GetChild(1).transform.GetChild(2).GetComponent<Transform>();
-        equiped_shoes = inventoryPanel.transform.GetChild(1).transform.GetChild(3).GetComponent<Transform>();
-        equiped_shortWeapon = inventoryPanel.transform.GetChild(1).transform.GetChild(4).GetComponent<Transform>();
-        equiped_longWeapon = inventoryPanel.transform.GetChild(1).transform.GetChild(5).GetComponent<Transform>();
         itemInfoText = inventoryPanel.transform.GetChild(5).GetComponentInChildren<Text>();
         itemInfoImage = inventoryPanel.transform.GetChild(4).transform.GetChild(0).GetComponent<Image>();
         str = inventoryPanel.transform.GetChild(3).transform.GetChild(0).GetComponent<Text>();
@@ -172,12 +153,6 @@ public class UIManager : MonoBehaviour
         itemInfoImage.enabled = false;
 
         expBar.fillAmount = 0f;
-        shortWeapon_C = null;
-        longWeapon_C = null;
-        shoes_C = null;
-        top_C = null;
-        bottoms_C = null;
-        Reset();
     }
 
     private void Update()
@@ -208,38 +183,6 @@ public class UIManager : MonoBehaviour
         CloseDropPanel();
         inventoryOn = false;
         Inventory(inventoryOn);
-    }
-
-    private void Reset()
-    {
-        gameDataObject.shortWeapon.Clear();
-        gameDataObject.longWeapon.Clear();
-        gameDataObject.shoes.Clear();
-        gameDataObject.top.Clear();
-        gameDataObject.bottoms.Clear();
-
-        gameDataObject.shortWeapon_C = null;
-        gameDataObject.longWeapon_C = null;
-        gameDataObject.shoes_C = null;
-        gameDataObject.top_C = null;
-        gameDataObject.bottoms_C = null;
-
-        gameDataObject.Level = 1;
-        gameDataObject.Exp = 0;
-        gameDataObject.Exp_require = 10;
-
-        gameDataObject.Str = 0;
-        gameDataObject.Agi = 0;
-        gameDataObject.Con = 0;
-        gameDataObject.Vit = 0;
-        gameDataObject.Status_own = 7;
-        gameDataObject.MaxHp = 1000;
-        gameDataObject.Hp = 1000;
-        gameDataObject.MaxSp = 100;
-        gameDataObject.Sp = 100;
-        gameDataObject.Dam = 5;
-        gameDataObject.Def = 5;
-        gameDataObject.Weight = 0;
     }
 
     #region [상호작용 아이콘 함수]
@@ -420,66 +363,14 @@ public class UIManager : MonoBehaviour
 
         if (isOn)
         {
-            AddInventory(gameDataObject.shortWeapon);
-            AddInventory(gameDataObject.longWeapon);
-            AddInventory(gameDataObject.shoes);
-            AddInventory(gameDataObject.top);
-            AddInventory(gameDataObject.bottoms);
-            shortWeapon_C = AddEquip(equiped_shortWeapon, gameDataObject.shortWeapon_C);
-            longWeapon_C = AddEquip(equiped_longWeapon, gameDataObject.longWeapon_C);
-            shoes_C = AddEquip(equiped_shoes, gameDataObject.shoes_C);
-            top_C = AddEquip(equiped_top, gameDataObject.top_C);
-            bottoms_C = AddEquip(equiped_bottoms, gameDataObject.bottoms_C);
+            GameManager.instance.InventoryOn();
         }
         else
         {
-            EmptyItemObject();
+            GameManager.instance.EmptyItemObject();
             itemInfoText.enabled = false;
             itemInfoImage.enabled = false;
         }
-    }
-
-    private void EmptyItemObject()
-    {
-        foreach (GameObject obj in list_inventory)
-            Destroy(obj);
-        list_inventory.Clear();
-        Destroy(shortWeapon_C);
-        Destroy(longWeapon_C);
-        Destroy(top_C);
-        Destroy(bottoms_C);
-        Destroy(shoes_C);
-    }
-
-    private void AddInventory(List<Item> items)
-    {
-        int idx = 1;
-        
-        for (int i = 1; i < itemSlots.Length + 1; i++)
-        {
-            if (itemSlots[i].childCount != 0)
-                idx++;
-            else
-                break;
-        }
-
-        foreach (var item in items)
-        {
-            GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/ItemSlot"), itemSlots[idx]);
-            obj.GetComponent<SlotItemInfo>().item = item;
-            obj.GetComponent<Image>().sprite = item.img;
-            list_inventory.Add(obj);
-        }
-    }
-
-    private GameObject AddEquip(Transform parent, Item item_c)
-    {
-        if (item_c == null || item_c.name == null || item_c.name == "") return null;
-        GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/ItemSlot"), parent);
-        obj.GetComponent<SlotItemInfo>().item = item_c;
-        obj.GetComponent<Image>().sprite = item_c.img;
-        obj.GetComponent<SlotItemInfo>().isEquip = true;
-        return obj;
     }
 
     public void ShowItemInfo(Item item)
@@ -512,175 +403,6 @@ public class UIManager : MonoBehaviour
 
         itemInfoImage.sprite = item.img;
         itemInfoImage.preserveAspect = true;
-    }
-
-    private void Equip(ItemType type)
-    {
-        Weapon weapon;
-        Clothes clothes;
-
-        switch (type)
-        {
-            case ItemType.shortWeapon:
-                if (shortWeapon_C != null)
-                    OffEquip(gameDataObject.shortWeapon, gameDataObject.shortWeapon_C, shortWeapon_C);
-                SlotItemInfo.instance.transform.SetParent(equiped_shortWeapon);
-                gameDataObject.shortWeapon_C = SlotItemInfo.instance.item as Weapon;
-                shortWeapon_C = SlotItemInfo.instance.gameObject;
-                SlotItemInfo.instance.isEquip = true;
-                gameDataObject.Str += SlotItemInfo.instance.item.str;
-                gameDataObject.Agi += SlotItemInfo.instance.item.agi;
-                gameDataObject.Con += SlotItemInfo.instance.item.con;
-                gameDataObject.Vit += SlotItemInfo.instance.item.vit;
-                weapon = SlotItemInfo.instance.item as Weapon;
-                gameDataObject.Dam += weapon.damage;
-                gameDataObject.shortWeapon.Remove(SlotItemInfo.instance.item);
-
-
-                break;
-            case ItemType.longWeapon:
-                if (longWeapon_C != null)
-                    OffEquip(gameDataObject.longWeapon, gameDataObject.longWeapon_C, longWeapon_C);
-                SlotItemInfo.instance.transform.SetParent(equiped_longWeapon);
-                gameDataObject.longWeapon_C = SlotItemInfo.instance.item as Weapon;
-                longWeapon_C = SlotItemInfo.instance.gameObject;
-                SlotItemInfo.instance.isEquip = true;
-                gameDataObject.Str += SlotItemInfo.instance.item.str;
-                gameDataObject.Agi += SlotItemInfo.instance.item.agi;
-                gameDataObject.Con += SlotItemInfo.instance.item.con;
-                gameDataObject.Vit += SlotItemInfo.instance.item.vit;
-                weapon = SlotItemInfo.instance.item as Weapon;
-                gameDataObject.Dam += weapon.damage;
-                gameDataObject.longWeapon.Remove(SlotItemInfo.instance.item);
-
-
-                break;
-            case ItemType.shoes:
-                if (shoes_C != null)
-                    OffEquip(gameDataObject.shoes, gameDataObject.shoes_C, shoes_C);
-                SlotItemInfo.instance.transform.SetParent(equiped_shoes);
-                gameDataObject.shoes_C = SlotItemInfo.instance.item as Clothes;
-                shoes_C = SlotItemInfo.instance.gameObject;
-                SlotItemInfo.instance.isEquip = true;
-                gameDataObject.Str += SlotItemInfo.instance.item.str;
-                gameDataObject.Agi += SlotItemInfo.instance.item.agi;
-                gameDataObject.Con += SlotItemInfo.instance.item.con;
-                gameDataObject.Vit += SlotItemInfo.instance.item.vit;
-                clothes = SlotItemInfo.instance.item as Clothes;
-                gameDataObject.Def += clothes.def;
-                gameDataObject.shoes.Remove(SlotItemInfo.instance.item);
-                break;
-            case ItemType.top:
-                if (top_C != null)
-                    OffEquip(gameDataObject.top, gameDataObject.top_C, top_C);
-                SlotItemInfo.instance.transform.SetParent(equiped_top);
-                gameDataObject.top_C = SlotItemInfo.instance.item as Clothes;
-                top_C = SlotItemInfo.instance.gameObject;
-                SlotItemInfo.instance.isEquip = true;
-                gameDataObject.Str += SlotItemInfo.instance.item.str;
-                gameDataObject.Agi += SlotItemInfo.instance.item.agi;
-                gameDataObject.Con += SlotItemInfo.instance.item.con;
-                gameDataObject.Vit += SlotItemInfo.instance.item.vit;
-                clothes = SlotItemInfo.instance.item as Clothes;
-                gameDataObject.Def += clothes.def;
-                gameDataObject.top.Remove(SlotItemInfo.instance.item);
-                break;
-            case ItemType.bottoms:
-                if (bottoms_C != null)
-                    OffEquip(gameDataObject.bottoms, gameDataObject.bottoms_C, bottoms_C);
-                SlotItemInfo.instance.transform.SetParent(equiped_bottoms);
-                gameDataObject.bottoms_C = SlotItemInfo.instance.item as Clothes;
-                bottoms_C = SlotItemInfo.instance.gameObject;
-                SlotItemInfo.instance.isEquip = true;
-                gameDataObject.Str += SlotItemInfo.instance.item.str;
-                gameDataObject.Agi += SlotItemInfo.instance.item.agi;
-                gameDataObject.Con += SlotItemInfo.instance.item.con;
-                gameDataObject.Vit += SlotItemInfo.instance.item.vit;
-                clothes = SlotItemInfo.instance.item as Clothes;
-                gameDataObject.Def += clothes.def;
-                gameDataObject.bottoms.Remove(SlotItemInfo.instance.item);
-                break;
-        }
-    }
-
-    private void OffEquip(List<Item> list_item, Item item_c, GameObject object_c)
-    {
-        int idx = 1;
-
-        for (int i = 1; i < itemSlots.Length + 1; i++)
-        {
-            if (itemSlots[i].childCount != 0)
-                idx++;
-            else
-                break;
-        }
-
-        list_item.Add(item_c);
-        object_c.transform.SetParent(itemSlots[idx]);
-        SlotItemInfo temp = object_c.GetComponent<SlotItemInfo>();
-        temp.isEquip = false;
-        gameDataObject.Str -= temp.item.str;
-        gameDataObject.Agi -= temp.item.agi;
-        gameDataObject.Con -= temp.item.con;
-        gameDataObject.Vit -= temp.item.vit;
-
-        if (item_c.itemType == ItemType.shortWeapon || item_c.itemType == ItemType.longWeapon)
-        {
-            Weapon weapon = temp.item as Weapon;
-            gameDataObject.Dam -= weapon.damage;
-        }
-        else
-        {
-            Clothes clothes = temp.item as Clothes;
-            gameDataObject.Def -= clothes.def;
-        }
-    }
-
-    public void OnDoubleClickEquip()
-    {
-        if (SlotItemInfo.instance != null)
-        {
-            if (!SlotItemInfo.instance.isEquip)
-                Equip(SlotItemInfo.instance.item.itemType);
-        }
-    }
-
-    public void OnDoubleClickEquipOff()
-    {
-        if (SlotItemInfo.instance.isEquip)
-        {
-            switch (SlotItemInfo.instance.item.itemType)
-            {
-                case ItemType.shortWeapon:
-                    OffEquip(gameDataObject.shortWeapon, gameDataObject.shortWeapon_C, shortWeapon_C);
-                    gameDataObject.shortWeapon_C = null;
-                    shortWeapon_C = null;
-                    break;
-                case ItemType.longWeapon:
-                    OffEquip(gameDataObject.longWeapon, gameDataObject.longWeapon_C, longWeapon_C);
-                    gameDataObject.longWeapon_C = null;
-                    longWeapon_C = null;
-                    break;
-                case ItemType.top:
-                    OffEquip(gameDataObject.top, gameDataObject.top_C, top_C);
-                    gameDataObject.top_C = null;
-                    top_C = null;
-                    break;
-                case ItemType.bottoms:
-                    OffEquip(gameDataObject.bottoms, gameDataObject.bottoms_C, bottoms_C);
-                    gameDataObject.bottoms_C = null;
-                    bottoms_C = null;
-                    break;
-                case ItemType.shoes:
-                    OffEquip(gameDataObject.shoes, gameDataObject.shoes_C, shoes_C);
-                    gameDataObject.shoes_C = null;
-                    shoes_C = null;
-                    break;
-            }
-
-            if (!list_inventory.Contains(SlotItemInfo.instance.gameObject))
-                list_inventory.Add(SlotItemInfo.instance.gameObject);
-        }
     }
     #endregion
 }
