@@ -35,6 +35,66 @@ public class PlayerInteraction : MonoBehaviour
 
     }
 
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+        DontDestroyOnLoad(this.gameObject);
+
+        interactionPoint = transform.GetChild(0).GetComponent<Transform>();
+
+        uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "ELEVATOR")
+            transform.SetParent(collision.transform);
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "ELEVATOR")
+        {
+            transform.SetParent(null);
+            DontDestroyOnLoad(this.gameObject);
+        }
+    }
+
+    void Update()
+    {
+        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, pointRadius, cols, interactableMask);
+
+        if (numFound > 0)
+        {
+            interactable = cols[0].GetComponent<IInteraction>();
+
+            if (interactable != null)
+            {
+                if (!uiManager.onIcon)
+                    uiManager.InteractionIconOn(interactable.interactionPrompt);
+
+                if (uiManager.casting || uiManager.isAction || uiManager.dropOn)
+                    uiManager.InteractionIconOff();
+
+                if (Input.GetKeyDown(KeyCode.F))
+                    if (!uiManager.casting && !uiManager.dropOn)
+                        interactable.Action(this);
+            }
+        }
+        else
+        {
+            if (interactable != null)
+                interactable = null;
+
+            if (uiManager.onIcon)
+                uiManager.InteractionIconOff();
+        }
+    }
+
     public void Kill()
     {
         if (questData.isActive)
@@ -80,50 +140,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 questManager.Complete();
             }
-        }
-    }
-
-    void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
-        DontDestroyOnLoad(this.gameObject);
-
-        interactionPoint = transform.GetChild(0).GetComponent<Transform>();
-
-        uiManager = GameObject.Find("UI").GetComponent<UIManager>();
-        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-    }
-
-    void Update()
-    {
-        numFound = Physics.OverlapSphereNonAlloc(interactionPoint.position, pointRadius, cols, interactableMask);
-
-        if (numFound > 0)
-        {
-            interactable = cols[0].GetComponent<IInteraction>();
-
-            if (interactable != null)
-            {
-                if (!uiManager.onIcon)
-                    uiManager.InteractionIconOn(interactable.interactionPrompt);
-
-                if (uiManager.casting || uiManager.isAction || uiManager.dropOn)
-                    uiManager.InteractionIconOff();
-
-                if (Input.GetKeyDown(KeyCode.F))
-                    interactable.Action(this);
-            }
-        }
-        else
-        {
-            if (interactable != null)
-                interactable = null;
-
-            if (uiManager.onIcon)
-                uiManager.InteractionIconOff();
         }
     }
 

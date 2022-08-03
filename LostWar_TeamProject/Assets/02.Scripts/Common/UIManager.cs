@@ -27,23 +27,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text npcName;
     [SerializeField] private Text talkText;
     [SerializeField] private Image portrait;
-    [SerializeField] public GameObject buttonPanel;
-    [SerializeField] private Text functionText;
     public bool isAction = false;
-    public bool goQuest = false;
-    public bool acceptQuest = false;
     public int talkIndex = 0;
 
     [Header("[Quest]")]
     [SerializeField] private GameObject questListPanel;
-    [SerializeField] private GameObject questPanel;
-    [SerializeField] private Text titleText;
-    [SerializeField] private Text contentsText;
     [SerializeField] private GameObject questPrefab;
     [SerializeField] private GameObject questGiver;
     public bool openingPanel = false;
     public GameObject QuestListPanel => questListPanel;
-    public GameObject QuestPanel => questPanel;
     public GameObject QuestPrefab => questPrefab;
 
     [Header("[PlayerState]")]
@@ -75,11 +67,13 @@ public class UIManager : MonoBehaviour
     private bool inventoryOn = false;
 
     public Coroutine castRoutine;
+    public Coroutine moveRoutine;
 
     private TalkManager talkManager;
     private QuestManager questManager;
     [SerializeField] private GameDataObject gameDataObject;
     public static UIManager instance = null;
+    private BasicBehaviour basicBehaviour;
 
     private void Awake()
     {
@@ -102,25 +96,20 @@ public class UIManager : MonoBehaviour
         npcName = talkPanel.transform.GetChild(0).GetComponent<Text>();
         talkText = talkPanel.transform.GetChild(1).GetComponent<Text>();
         portrait = talkPanel.transform.GetChild(2).transform.GetChild(0).GetComponent<Image>();
-        buttonPanel = talkPanel.transform.GetChild(3).gameObject;
-        functionText = buttonPanel.transform.GetChild(0).GetComponentInChildren<Text>();
 
         questListPanel = transform.GetChild(4).gameObject;
-        questPanel = transform.GetChild(5).gameObject;
-        titleText = questPanel.transform.GetChild(0).GetComponent<Text>();
-        contentsText = questPanel.transform.GetChild(1).GetComponentInChildren<Text>();
         questGiver = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
 
-        hpBar = transform.GetChild(6).transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
-        hpAmount = transform.GetChild(6).transform.GetChild(1).transform.GetChild(2).GetComponent<Text>();
-        spBar = transform.GetChild(6).transform.GetChild(2).transform.GetChild(0).GetComponent<Image>();
-        spAmount = transform.GetChild(6).transform.GetChild(2).transform.GetChild(2).GetComponent<Text>();
-        expBar = transform.GetChild(6).transform.GetChild(3).transform.GetChild(0).GetComponent<Image>();
-        lvText = transform.GetChild(6).transform.GetChild(4).GetComponent<Text>();
+        hpBar = transform.GetChild(5).transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+        hpAmount = transform.GetChild(5).transform.GetChild(1).transform.GetChild(2).GetComponent<Text>();
+        spBar = transform.GetChild(5).transform.GetChild(2).transform.GetChild(0).GetComponent<Image>();
+        spAmount = transform.GetChild(5).transform.GetChild(2).transform.GetChild(2).GetComponent<Text>();
+        expBar = transform.GetChild(5).transform.GetChild(3).transform.GetChild(0).GetComponent<Image>();
+        lvText = transform.GetChild(5).transform.GetChild(4).GetComponent<Text>();
 
-        dropPanel = transform.GetChild(8).gameObject;
+        dropPanel = transform.GetChild(7).gameObject;
 
-        inventoryPanel = transform.GetChild(7).gameObject;
+        inventoryPanel = transform.GetChild(6).gameObject;
         itemInfoText = inventoryPanel.transform.GetChild(5).GetComponentInChildren<Text>();
         itemInfoImage = inventoryPanel.transform.GetChild(4).transform.GetChild(0).GetComponent<Image>();
         str = inventoryPanel.transform.GetChild(3).transform.GetChild(0).GetComponent<Text>();
@@ -134,6 +123,7 @@ public class UIManager : MonoBehaviour
 
         talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        basicBehaviour = FindObjectOfType<BasicBehaviour>();
     }
 
     private void Start()
@@ -143,9 +133,7 @@ public class UIManager : MonoBehaviour
         castingBar.fillAmount = 0f;
         noticeText.gameObject.SetActive(false);
         talkPanel.SetActive(false);
-        buttonPanel.SetActive(false);
         questListPanel.SetActive(false);
-        questPanel.SetActive(false);
         questGiver.SetActive(false);
         inventoryPanel.SetActive(false);
         dropPanel.SetActive(false);
@@ -167,9 +155,24 @@ public class UIManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I))
         {
+            if (questManager.IsStarting || isAction || dropOn) return;
             inventoryOn = !inventoryOn;
             Inventory(inventoryOn);
         }
+
+        if (casting)
+        {
+            if (basicBehaviour.IsMoving())
+            {
+                StopCoroutine(moveRoutine);
+                StopCasting();
+                StartCoroutine(NoticeText(false, "중간에 움직여서 취소됐습니다."));
+            }
+        }
+
+        if (dropOn)
+            if (basicBehaviour.IsMoving())
+                CloseDropPanel();
 
         str.text = $"STR : {gameDataObject.Str}";
         agi.text = $"AGI : {gameDataObject.Agi}";
@@ -265,6 +268,7 @@ public class UIManager : MonoBehaviour
             SelfTalk(quest.ObjectID);
 
         talkPanel.SetActive(isAction);
+        AllUiClose();
     }
 
     void Talk(int id)
@@ -274,7 +278,6 @@ public class UIManager : MonoBehaviour
 
         if (talkData == null)
         {
-            //Cursor.lockState = CursorLockMode.Locked;
             isAction = false;
             talkIndex = 0;
             questManager.CheckQuest(id);
@@ -285,7 +288,6 @@ public class UIManager : MonoBehaviour
         talkText.text = talkData.Split(':')[1];
         portrait.sprite = talkManager.GetPortrait(id, int.Parse(talkData.Split(':')[2]));
 
-        //Cursor.lockState = CursorLockMode.None;
         isAction = true;
         talkIndex++;
     }
@@ -331,6 +333,9 @@ public class UIManager : MonoBehaviour
     #region [아이템 드랍]
     public void OpenDropPanel(DropItem obj)
     {
+        Inventory(false);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         dropPanel.SetActive(true);
         dropOn = true;
         items = obj.items;
@@ -349,6 +354,8 @@ public class UIManager : MonoBehaviour
 
     public void CloseDropPanel()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         if (dropPrefab != null)
         {
             foreach (var prefab in dropPrefab)
@@ -367,12 +374,16 @@ public class UIManager : MonoBehaviour
         if (isOn)
         {
             GameManager.instance.InventoryOn();
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
         else
         {
             GameManager.instance.EmptyItemObject();
             itemInfoText.enabled = false;
             itemInfoImage.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
     }
 

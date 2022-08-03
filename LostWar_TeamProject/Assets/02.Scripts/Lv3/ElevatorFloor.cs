@@ -18,18 +18,13 @@ public class ElevatorFloor : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.transform.SetParent(gameObject.transform);
             elevator.onElevator = true;
-        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.transform.SetParent(null);
-            
             elevator.onElevator = false;
             StartCoroutine(CloseElevatorDoor());
         }

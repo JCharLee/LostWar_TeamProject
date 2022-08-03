@@ -95,6 +95,7 @@ public class QuestManager : MonoBehaviour
     {
         questId += 10;
         questActionIdx = 0;
+        uiManager.UpdateExp(questList[questId].ExpReward);
 
         questData = questList[questId];
         player.QuestData = questData;
@@ -113,7 +114,6 @@ public class QuestManager : MonoBehaviour
             key.GetComponent<Key>().keyNumber = 2;
         }
 
-        uiManager.UpdateExp(questList[questId].ExpReward);
         questData.isActive = false;
         if (questList[questId].NpcId.Length == 1) return;
 

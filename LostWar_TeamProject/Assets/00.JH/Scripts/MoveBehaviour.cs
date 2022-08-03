@@ -43,40 +43,46 @@ public class MoveBehaviour : GenericBehaviour
 		rayShoot = GetComponent<RayShoot>();
 		speedSeeker = runSpeed;
 		usingWeapon = UsingWeapon.none;
+
+		Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
 	}
 
 	// Update is used to set features regardless the active behaviour.
 	void Update()
 	{
+		if (UIManager.instance.isAction || QuestManager.instance.IsStarting)
+			return;
+
 		if (!jump && Input.GetButtonDown(jumpButton) && behaviourManager.IsCurrentBehaviour(this.behaviourCode) && !behaviourManager.IsOverriding())
 		{
 			jump = true;
 		}
-		
-		if(AimBehaviourBasic.aim)
-		{
-		if (Input.GetKey(KeyCode.W))
-		{
-			transform.Translate(Vector3.forward*Time.deltaTime*aimWalkSpeed);
-		}
 
-		if (Input.GetKey(KeyCode.S))
-		{
-			transform.Translate(Vector3.forward *-1* Time.deltaTime*aimWalkSpeed);
-		}
+        if (AimBehaviourBasic.aim)
+        {
+            if (Input.GetKey(KeyCode.W))
+            {
+                transform.Translate(Vector3.forward * Time.deltaTime * aimWalkSpeed);
+            }
 
-		if (Input.GetKey(KeyCode.A))
-		{
-			transform.Translate(Vector3.right*-1 * Time.deltaTime*aimWalkSpeed);
-		}
+            if (Input.GetKey(KeyCode.S))
+            {
+                transform.Translate(Vector3.forward * -1 * Time.deltaTime * aimWalkSpeed);
+            }
 
-		if (Input.GetKey(KeyCode.D))
-		{
-			transform.Translate(Vector3.right * Time.deltaTime*aimWalkSpeed);
-		}
-		}
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(Vector3.right * -1 * Time.deltaTime * aimWalkSpeed);
+            }
 
-		if (Input.GetKeyDown(KeyCode.Alpha1) && !haveMotion)//원거리 무기
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector3.right * Time.deltaTime * aimWalkSpeed);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && !haveMotion)//원거리 무기
 		{
 			if (cur_long_weapon == null) return;
 			if (usingWeapon == UsingWeapon.short_dist)//근거리 무기를 들고 있었다면
@@ -133,6 +139,8 @@ public class MoveBehaviour : GenericBehaviour
 	// LocalFixedUpdate overrides the virtual function of the base class.
 	public override void LocalFixedUpdate()
 	{
+		if (UIManager.instance.isAction || QuestManager.instance.IsStarting)
+			return;
 		MovementManagement(behaviourManager.GetH, behaviourManager.GetV);
 	}
 	
@@ -143,6 +151,8 @@ public class MoveBehaviour : GenericBehaviour
 	// Deal with the basic player movement
 	void MovementManagement(float horizontal, float vertical)
 	{
+		if (UIManager.instance.isAction || QuestManager.instance.IsStarting)
+			return;
 		// On ground, obey gravity.
 
 		// Avoid takeoff when reached a slope end.
@@ -169,7 +179,7 @@ public class MoveBehaviour : GenericBehaviour
 		{
 			speed = sprintSpeed;
 		}
-		transform.Translate(Vector3.forward * speed * Time.deltaTime*3);
+		transform.Translate(Vector3.forward * speed * 2.5f * Time.deltaTime*3);
 
 		behaviourManager.GetAnim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
 	}
@@ -228,7 +238,9 @@ public class MoveBehaviour : GenericBehaviour
 	
 public void FixedUpdate()
 	{
-	if(Input.GetMouseButton(0)&&!Input.GetKey(KeyCode.LeftShift))
+		if (UIManager.instance.isAction || QuestManager.instance.IsStarting)
+			return;
+		if (Input.GetMouseButton(0)&&!Input.GetKey(KeyCode.LeftShift))
         {
 			if (!haveMotion)
 			{
@@ -242,6 +254,8 @@ public void FixedUpdate()
 
 	void QuickRotating()
 	{
+		if (UIManager.instance.isAction || QuestManager.instance.IsStarting)
+			return;
 		Vector3 forward = behaviourManager.playerCamera.TransformDirection(Vector3.forward);
 		// Player is moving on ground, Y component of camera facing is not relevant.
 		forward.y = 0.0f;

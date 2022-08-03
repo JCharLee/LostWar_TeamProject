@@ -2374,7 +2374,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: cb476683c3451fb47b22370c23aa5a84, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a815f79d974ec4b4787a1dc9b805cf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 0.11
+  walkSpeed: 0.15
   runSpeed: 0.8
   sprintSpeed: 1.5
   speedDampTime: 0.1

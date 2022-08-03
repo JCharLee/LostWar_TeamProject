@@ -25,25 +25,26 @@ public class ItemBox : DropItem, IInteraction
     {
         if (items[0] == null && items[1] == null && items[2] == null)
         {
+            if (uiManager.dropOn)
+                uiManager.CloseDropPanel();
             gameObject.layer = 0;
             GameObject.FindGameObjectWithTag("Player").transform.GetChild(9).gameObject.SetActive(true);
-            uiManager.CloseDropPanel();
             return;
         }
     }
 
     public bool Action(PlayerInteraction interactor)
     {
-        StartCoroutine(ItemboxOpen());
+        uiManager.moveRoutine = StartCoroutine(ItemboxOpen());
         return true;
     }
 
     IEnumerator ItemboxOpen()
     {
-        StartCoroutine(uiManager.InteractionCasting(castTime));
+        uiManager.castRoutine = StartCoroutine(uiManager.InteractionCasting(castTime));
+        if (uiManager.castRoutine == null) uiManager.moveRoutine = null;
         yield return new WaitForSeconds(castTime);
         uiManager.OpenDropPanel(this);
-        Debug.Log("Item box open!");
     }
 
     public override void InitItem()

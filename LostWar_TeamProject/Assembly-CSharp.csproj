@@ -90,6 +90,7 @@
     <Compile Include="Assets\02.Scripts\Lv1\Lv1_Door.cs" />
     <Compile Include="Assets\02.Scripts\Lv1\SecretWall.cs" />
     <Compile Include="Assets\02.Scripts\Lv2\NPC\NPCObject.cs" />
+    <Compile Include="Assets\02.Scripts\Lv3\BossRoomDoor.cs" />
     <Compile Include="Assets\02.Scripts\Lv3\Elevator.cs" />
     <Compile Include="Assets\02.Scripts\Lv3\ElevatorDoor.cs" />
     <Compile Include="Assets\02.Scripts\Lv3\ElevatorFloor.cs" />

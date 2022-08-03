@@ -33,6 +33,9 @@ public class SceneLoader : MonoBehaviour
             case "Level3":
                 SceneManager.LoadScene("Lv3_LoadingScene");
                 break;
+            case "BossRoom":
+                SceneManager.LoadScene("BossRoom_LoadingScene");
+                break;
         }
     }
 

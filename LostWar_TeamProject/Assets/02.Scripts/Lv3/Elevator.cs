@@ -55,7 +55,7 @@ public class Elevator : MonoBehaviour, IInteraction
     public bool Action(PlayerInteraction interactor)
     {
         isDown = !isDown;
-        StartCoroutine(ElevatorMove());
+        uiManager.moveRoutine = StartCoroutine(ElevatorMove());
         return true;
     }
 
@@ -65,7 +65,8 @@ public class Elevator : MonoBehaviour, IInteraction
 
         if (onElevator)
         {
-            StartCoroutine(uiManager.InteractionCasting(castingTime));
+            uiManager.castRoutine = StartCoroutine(uiManager.InteractionCasting(castingTime));
+            if (uiManager.castRoutine == null) uiManager.moveRoutine = null;
             yield return new WaitForSeconds(castingTime);
             if (isDown)
             {

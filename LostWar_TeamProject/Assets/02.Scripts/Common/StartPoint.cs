@@ -12,8 +12,8 @@ public class StartPoint : MonoBehaviour
         thePlayer = FindObjectOfType<PlayerInteraction>();
         if (startPoint == thePlayer.currentMapName)
         {
-            thePlayer.transform.position = transform.position;
-            thePlayer.transform.rotation = transform.rotation;
+            thePlayer.transform.position = this.transform.position;
+            thePlayer.transform.rotation = this.transform.rotation;
         }
     }
 }

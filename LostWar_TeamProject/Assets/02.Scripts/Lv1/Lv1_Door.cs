@@ -63,33 +63,4 @@ public class Lv1_Door : MonoBehaviour, IInteraction
 
         this.gameObject.layer = 8;
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    PlayerInteraction.OnInteract += this.Action;
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    PlayerInteraction.OnInteract -= this.Action;
-    //}
-
-    //void Update()
-    //{
-    //    if (isOpen)
-    //    {
-    //        door.rotation = Quaternion.RotateTowards(door.rotation, Quaternion.Euler(0f, 160f, 0f), speed * Time.deltaTime);
-    //    }
-    //    else
-    //    {
-    //        door.rotation = Quaternion.RotateTowards(door.rotation, Quaternion.Euler(0f, 270f, 0f), speed * Time.deltaTime);
-    //    }
-    //}
-
-    //public IEnumerator Action()
-    //{
-    //    isOpen = true;
-    //    yield return new WaitForSeconds(3f);
-    //    isOpen = false;
-    //}
 }

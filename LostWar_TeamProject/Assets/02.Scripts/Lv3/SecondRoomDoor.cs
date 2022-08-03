@@ -24,11 +24,11 @@ public class SecondRoomDoor : Lv3_Door
 
     public override bool Action(PlayerInteraction interactor)
     {
-        var inventory = interactor.GetComponent<PlayerInteraction>();
+        var key = interactor.GetComponent<PlayerInteraction>();
 
-        if (inventory == null) return false;
+        if (key == null) return false;
 
-        if (inventory.hasKey1)
+        if (key.hasKey1)
         {
             return base.Action(interactor);
         }

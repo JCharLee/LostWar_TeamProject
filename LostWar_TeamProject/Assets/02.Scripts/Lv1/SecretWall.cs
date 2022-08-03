@@ -21,8 +21,6 @@ public class SecretWall : MonoBehaviour, IInteraction
 
     private UIManager uiManager;
 
-    public Coroutine moveRoutine;
-
     void Start()
     {
         secretWall = GetComponent<Transform>();
@@ -38,14 +36,14 @@ public class SecretWall : MonoBehaviour, IInteraction
 
     public bool Action(PlayerInteraction interactor)
     {
-        moveRoutine = StartCoroutine(WallOpen());
+        uiManager.moveRoutine = StartCoroutine(WallOpen());
         return true;
     }
 
     IEnumerator WallOpen()
     {
         uiManager.castRoutine = StartCoroutine(uiManager.InteractionCasting(castingTime));
-        if (uiManager.castRoutine == null) StopCoroutine(moveRoutine);
+        if (uiManager.castRoutine == null) uiManager.moveRoutine = null;
         yield return new WaitForSeconds(castingTime);
         this.gameObject.layer = 0;
 
