@@ -41,7 +41,14 @@ public class FadeScene : MonoBehaviour
                     SceneManager.LoadScene("Level1");
                     break;
                 case "Finish":
+                    Destroy(FindObjectOfType<PlayerInteraction>().gameObject);
+                    Destroy(FindObjectOfType<UIManager>().gameObject);
+                    Destroy(FindObjectOfType<QuestManager>().gameObject);
+                    Destroy(FindObjectOfType<TalkManager>().gameObject);
+                    Destroy(FindObjectOfType<GameManager>().gameObject);
                     SceneManager.LoadScene("Finish");
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true;
                     break;
                 case "Main":
                     SceneManager.LoadScene("Main");

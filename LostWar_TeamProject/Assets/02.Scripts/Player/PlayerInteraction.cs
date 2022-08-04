@@ -19,6 +19,7 @@ public class PlayerInteraction : MonoBehaviour
     [SerializeField] private QuestData questData;
     private QuestManager questManager;
     public static PlayerInteraction instance = null;
+    private BasicBehaviour basicBehaviour;
 
     public string currentMapName;
 
@@ -47,6 +48,7 @@ public class PlayerInteraction : MonoBehaviour
 
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        basicBehaviour = GetComponent<BasicBehaviour>();
     }
 
     private void OnCollisionEnter(Collision collision)

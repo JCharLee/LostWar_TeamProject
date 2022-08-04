@@ -23,6 +23,7 @@ public class Elevator : MonoBehaviour, IInteraction
     ElevatorDoor topDoor;
     ElevatorDoor bottomDoor;
     UIManager uiManager;
+    BasicBehaviour basicBehaviour;
 
     [SerializeField] string prompt;
 
@@ -39,6 +40,7 @@ public class Elevator : MonoBehaviour, IInteraction
         topDoor = GameObject.Find("Elevator").transform.GetChild(2).GetComponent<ElevatorDoor>();
         bottomDoor = GameObject.Find("Elevator").transform.GetChild(3).GetComponent<ElevatorDoor>();
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        basicBehaviour = FindObjectOfType<BasicBehaviour>();
     }
 
     void Start()

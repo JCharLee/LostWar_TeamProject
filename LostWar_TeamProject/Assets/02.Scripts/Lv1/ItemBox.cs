@@ -10,12 +10,14 @@ public class ItemBox : DropItem, IInteraction
     [SerializeField] string prompt;
 
     private UIManager uiManager;
+    private BasicBehaviour basicBehaviour;
 
     public string interactionPrompt => prompt;
 
     void Start()
     {
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        basicBehaviour = FindObjectOfType<BasicBehaviour>();
 
         prompt = "[F] 상자 열기";
         InitItem();

@@ -2234,6 +2234,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 550609690}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &552762159 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3361326707275054548, guid: cc5db88956188ec4e99ecccc1cc1a855,
+    type: 3}
+  m_PrefabInstance: {fileID: 640162205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &561588227
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2594,6 +2600,12 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5211471753867180955, guid: cc5db88956188ec4e99ecccc1cc1a855,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 944f02d20fc5a1847896d0a38e11d053,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5db88956188ec4e99ecccc1cc1a855, type: 3}
 --- !u!4 &667310655 stripped
@@ -4178,11 +4190,23 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1362279686091480186, guid: a5b7c28482c1e9a4693d26e802c2e223,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 944f02d20fc5a1847896d0a38e11d053,
+        type: 2}
     - target: {fileID: 1362279686875115273, guid: a5b7c28482c1e9a4693d26e802c2e223,
         type: 3}
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1362279686875115273, guid: a5b7c28482c1e9a4693d26e802c2e223,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 944f02d20fc5a1847896d0a38e11d053,
+        type: 2}
     - target: {fileID: 1822242649659793645, guid: a5b7c28482c1e9a4693d26e802c2e223,
         type: 3}
       propertyPath: m_Layer
@@ -4288,6 +4312,12 @@ PrefabInstance:
       propertyPath: m_Convex
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6756679166797275675, guid: a5b7c28482c1e9a4693d26e802c2e223,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 944f02d20fc5a1847896d0a38e11d053,
+        type: 2}
     - target: {fileID: 7055261761535459641, guid: a5b7c28482c1e9a4693d26e802c2e223,
         type: 3}
       propertyPath: m_Layer
@@ -7083,6 +7113,59 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1446798592}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1448146614
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448146615}
+  - component: {fileID: 1448146617}
+  - component: {fileID: 1448146616}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1448146615
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448146614}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
+  m_LocalPosition: {x: 9.809, y: 0.077, z: 1.64}
+  m_LocalScale: {x: 0.2, y: 0.4, z: 1.9829094}
+  m_Children: []
+  m_Father: {fileID: 552762159}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
+--- !u!65 &1448146616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448146614}
+  m_Material: {fileID: 13400000, guid: 944f02d20fc5a1847896d0a38e11d053, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1448146617
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448146614}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1484124685 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8966627916916610821, guid: 711016e15dc0bf14c91cd472ebddb879,

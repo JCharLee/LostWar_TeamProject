@@ -10,6 +10,31 @@ public class QuestGiver : MonoBehaviour, IInteraction
 
     private UIManager uiManager;
 
+    private Coroutine castRoutine = null;
+    private Coroutine moveRoutine = null;
+    public Coroutine CastRoutine
+    {
+        get
+        {
+            return castRoutine;
+        }
+        set
+        {
+            castRoutine = value;
+        }
+    }
+    public Coroutine MoveRoutine
+    {
+        get
+        {
+            return moveRoutine;
+        }
+        set
+        {
+            moveRoutine = value;
+        }
+    }
+
     public int ObjectID => objectID;
 
     public string interactionPrompt => null;

@@ -7,19 +7,16 @@ public class SecretWall : MonoBehaviour, IInteraction
 {
     [SerializeField] Transform secretWall;
     [SerializeField] Transform openPoint;
-    [SerializeField] Image interactionImg;
-    [SerializeField] Text _text;
-    [SerializeField] Image castingBar_back;
-    [SerializeField] Image castingBar;
 
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float moveTime;
     [SerializeField] private float current;
     private float castingTime = 5.0f;
 
-    [SerializeField] string prompt;
+    string prompt;
 
     private UIManager uiManager;
+    private BasicBehaviour basicBehaviour;
 
     void Start()
     {
@@ -27,6 +24,7 @@ public class SecretWall : MonoBehaviour, IInteraction
         openPoint = GameObject.Find("OpenPoint").GetComponent<Transform>();
 
         uiManager = GameObject.Find("UI").GetComponent<UIManager>();
+        basicBehaviour = FindObjectOfType<BasicBehaviour>();
 
         moveTime = (openPoint.position - secretWall.position).magnitude / speed;
         prompt = "[F] 조사하기";

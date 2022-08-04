@@ -11,11 +11,17 @@ public class BossRoomDoor : MonoBehaviour, IInteraction
     private string prompt;
     private string cautionText;
 
+    private UIManager uiManager;
+    private BasicBehaviour basicBehaviour;
+
     public string interactionPrompt => prompt;
 
     private void Awake()
     {
         thePlayer = FindObjectOfType<PlayerInteraction>();
+
+        uiManager = FindObjectOfType<UIManager>();
+        basicBehaviour = FindObjectOfType<BasicBehaviour>();
     }
 
     private void Start()
@@ -30,7 +36,7 @@ public class BossRoomDoor : MonoBehaviour, IInteraction
         if (key == null) return false;
         if (key.hasKey1 && key.hasKey2)
         {
-            UIManager.instance.moveRoutine = StartCoroutine(DoorOpen());
+            uiManager.moveRoutine = StartCoroutine(DoorOpen());
             return true;
         }
         if (!UIManager.instance.alert)
@@ -40,8 +46,8 @@ public class BossRoomDoor : MonoBehaviour, IInteraction
 
     IEnumerator DoorOpen()
     {
-        UIManager.instance.castRoutine = StartCoroutine(UIManager.instance.InteractionCasting(castTime));
-        if (UIManager.instance.castRoutine == null) UIManager.instance.moveRoutine = null;
+        uiManager.castRoutine = StartCoroutine(UIManager.instance.InteractionCasting(castTime));
+        if (uiManager.castRoutine == null) uiManager.moveRoutine = null;
         yield return new WaitForSeconds(castTime);
         thePlayer.currentMapName = transferMapName;
         SceneLoader.LoadScene(transferMapName);
