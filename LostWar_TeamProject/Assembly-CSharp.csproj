@@ -68,12 +68,14 @@
     <Compile Include="Assets\00.JH\Scripts\SwordAttack.cs" />
     <Compile Include="Assets\00.JH\Scripts\ThirdPersonOrbitCamBasic.cs" />
     <Compile Include="Assets\02.Scripts\Common\DropItem.cs" />
+    <Compile Include="Assets\02.Scripts\Common\FadeScene.cs" />
     <Compile Include="Assets\02.Scripts\Common\GameManager.cs" />
     <Compile Include="Assets\02.Scripts\Common\GetDropItem.cs" />
     <Compile Include="Assets\02.Scripts\Common\GoToNextLevel.cs" />
     <Compile Include="Assets\02.Scripts\Common\IInteraction.cs" />
     <Compile Include="Assets\02.Scripts\Common\LookAtCamera.cs" />
     <Compile Include="Assets\02.Scripts\Common\MyGizmos.cs" />
+    <Compile Include="Assets\02.Scripts\Common\Opening.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\Locator.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\QuestData.cs" />
     <Compile Include="Assets\02.Scripts\Common\Quest\QuestGiver.cs" />
@@ -115,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\00.JH\Models\Modern Guns - Handgun\README.txt" />
+    <None Include="Assets\07.Images\Fonts\roboto\NOTICE.txt" />
     <None Include="Assets\03.Models\DirtyApartments\_materials\DoubleSided.shader" />
     <None Include="Assets\08.Effect\Shared\Shaders\SurfaceShader_VC.shader" />
     <None Include="Assets\00.JH\Models\Colt Python\Read_me.txt" />

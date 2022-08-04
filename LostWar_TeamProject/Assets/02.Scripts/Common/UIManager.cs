@@ -66,6 +66,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text sp;
     private bool inventoryOn = false;
 
+    public GameObject fadeObject;
+
     public Coroutine castRoutine;
     public Coroutine moveRoutine;
 
@@ -120,6 +122,8 @@ public class UIManager : MonoBehaviour
         def = inventoryPanel.transform.GetChild(3).transform.GetChild(5).GetComponent<Text>();
         hp = inventoryPanel.transform.GetChild(3).transform.GetChild(6).GetComponent<Text>();
         sp = inventoryPanel.transform.GetChild(3).transform.GetChild(7).GetComponent<Text>();
+
+        fadeObject = transform.GetChild(8).gameObject;
 
         talkManager = GameObject.Find("TalkManager").GetComponent<TalkManager>();
         questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();

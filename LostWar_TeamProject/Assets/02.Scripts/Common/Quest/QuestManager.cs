@@ -102,8 +102,12 @@ public class QuestManager : MonoBehaviour
         questData.isActive = true;
         uiManager.QuestListPanel.SetActive(true);
         if (questId != 150)
+        {
             Instantiate(uiManager.QuestPrefab, uiManager.QuestListPanel.transform);
-        QuestContents.contents.QuestData = questData;
+            QuestContents.contents.QuestData = questData;
+        }
+        else
+            uiManager.fadeObject.SetActive(true);
     }
 
     public void Complete()

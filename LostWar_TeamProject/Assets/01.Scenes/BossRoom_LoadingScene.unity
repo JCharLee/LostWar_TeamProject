@@ -383,11 +383,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC9C0\uD558 \uAE4A\uC219\uD788 \uC704\uCE58\uD558\uACE0 \uC788\uB294
-    \uBC99\uCEE4\uC774\uC790 \uC5F0\uAD6C\uC18C.\n\uC774 \uACF3\uC5D0\uC11C \uBB34\uC5B8\uAC00
-    \uD070 \uC74C\uBAA8\uAC00 \uAFB8\uBA70\uC9C0\uACE0 \uC788\uB294\uB4EF \uD558\uB2E4.\n\uC5B4\uB518\uAC00\uC5D0
-    \uC788\uB294 \uC778\uC9C8 \uBB34\uB9AC\uC5D0 \uC788\uC744 \uAC00\uC871\uB4E4\uC744
-    \uCC3E\uC790."
+  m_Text: "\uC5F4\uC1E0\uB97C \uCC3E\uC544\uC11C \uC5F0\uAD6C\uC18C\uC7A5\uC2E4\uC5D0
+    \uB4E4\uC5B4\uC654\uB2E4.\n\uAC00\uC871\uB4E4\uC740 \uADF8 \uACF3\uC5D0 \uC788\uC744\uAE4C?\n\uADF8\uB97C
+    \uAE30\uB2E4\uB9AC\uACE0 \uC788\uB294 \uAC83\uC740?"
 --- !u!222 &513169376
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -741,7 +739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51cf6ab42aac130419508e718077e043, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fb1ded6371f62b947896cea8270776fc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -844,7 +842,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uC5F0\uAD6C\uC18C"
+  m_Text: "\uC5F0\uAD6C\uC18C\uC7A5\uC2E4"
 --- !u!222 &1771396030
 CanvasRenderer:
   m_ObjectHideFlags: 0
