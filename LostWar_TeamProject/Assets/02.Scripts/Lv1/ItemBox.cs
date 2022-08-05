@@ -5,7 +5,7 @@ using ItemSpace;
 
 public class ItemBox : DropItem, IInteraction
 {
-    private float castTime = 3f;
+    private float castTime = 2f;
 
     [SerializeField] string prompt;
 
@@ -53,6 +53,6 @@ public class ItemBox : DropItem, IInteraction
     {
         items[0] = ItemList.instance.Get("Sword");
         items[1] = ItemList.instance.Get("Pistol");
-        items[2] = null;
+        items[2] = ItemList.instance.Get("HP Potion");
     }
 }

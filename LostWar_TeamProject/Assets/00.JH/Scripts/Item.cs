@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace ItemSpace
 {
-    public enum ItemType { shortWeapon, longWeapon, shoes, top, bottoms }// 장비 부위 분류
+    public enum ItemType { shortWeapon, longWeapon, shoes, top, bottoms, potion }// 장비 부위 분류
+    public enum PotionType { HP, SP }
     [System.Serializable]
     public class Item
     {
@@ -48,6 +49,30 @@ namespace ItemSpace
         public Weapon(string _name, int _str, int _agi, int _con, int _vit, float _damage, float _weight, ItemType _itemType, Sprite image)
         {
             name = _name; str = _str; agi = _agi; con = _con; vit = _vit; damage = _damage; weight = _weight; itemType = _itemType; img = image;
+        }
+    }
+
+    [System.Serializable]
+    public class Potion : Item
+    {
+        public PotionType potionType;
+        public float amount;
+        public int count;
+
+        public Potion(string _name, ItemType itype, PotionType ptype, float _amount, int _count, Sprite image)
+        {
+            name = _name;
+            itemType = itype;
+            potionType = ptype;
+            amount = _amount;
+            count = _count;
+            img = image;
+        }
+
+        public void Use()
+        {
+            Debug.Log($"Heal +{amount}");
+            count--;
         }
     }
 }

@@ -11,7 +11,7 @@ public class SecretWall : MonoBehaviour, IInteraction
     [SerializeField] private float speed = 3.0f;
     [SerializeField] private float moveTime;
     [SerializeField] private float current;
-    private float castingTime = 5.0f;
+    private float castingTime = 3.0f;
 
     string prompt;
 

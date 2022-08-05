@@ -95,6 +95,11 @@ public class PlayerInteraction : MonoBehaviour
             if (uiManager.onIcon)
                 uiManager.InteractionIconOff();
         }
+
+        if (SceneLoader.isLoading)
+            GetComponent<Rigidbody>().Sleep();
+        else
+            GetComponent<Rigidbody>().WakeUp();
     }
 
     public void Kill()

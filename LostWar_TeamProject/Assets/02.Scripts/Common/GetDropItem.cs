@@ -24,7 +24,7 @@ public class GetDropItem : MonoBehaviour
         {
             if (questManager.QuestId == 10)
             {
-                if (uiManager.items[itemIdx].name == "Sword" || uiManager.items[itemIdx].name == "Pistol")
+                if (uiManager.items[itemIdx].name == "Sword" || uiManager.items[itemIdx].name == "Pistol" || uiManager.items[itemIdx].name == "HP Potion")
                     player.Collect();
             }
         }
@@ -52,6 +52,11 @@ public class GetDropItem : MonoBehaviour
         else if (uiManager.items[itemIdx].itemType == ItemType.bottoms)
         {
             gameDataObject.bottoms.Add(uiManager.items[itemIdx]);
+            uiManager.items[itemIdx] = null;
+        }
+        else if (uiManager.items[itemIdx].itemType == ItemType.potion)
+        {
+            gameDataObject.potion.Add(uiManager.items[itemIdx]);
             uiManager.items[itemIdx] = null;
         }
 

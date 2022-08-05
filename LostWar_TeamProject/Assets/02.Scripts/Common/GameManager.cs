@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
         gameDataObject.shoes.Clear();
         gameDataObject.top.Clear();
         gameDataObject.bottoms.Clear();
+        gameDataObject.potion.Clear();
 
         gameDataObject.shortWeapon_C = null;
         gameDataObject.longWeapon_C = null;
@@ -91,6 +92,7 @@ public class GameManager : MonoBehaviour
         AddInventory(gameDataObject.shoes);
         AddInventory(gameDataObject.top);
         AddInventory(gameDataObject.bottoms);
+        AddInventory(gameDataObject.potion);
         shortWeapon_C = AddEquip(equiped_shortWeapon, gameDataObject.shortWeapon_C);
         longWeapon_C = AddEquip(equiped_longWeapon, gameDataObject.longWeapon_C);
         shoes_C = AddEquip(equiped_shoes, gameDataObject.shoes_C);
@@ -126,6 +128,12 @@ public class GameManager : MonoBehaviour
         {
             GameObject obj = Instantiate(Resources.Load<GameObject>("Prefabs/ItemSlot"), itemSlots[idx]);
             obj.GetComponent<SlotItemInfo>().item = item;
+            if (item.itemType == ItemType.potion)
+            {
+                Potion potion = item as Potion;
+                obj.GetComponentInChildren<Text>().enabled = true;
+                obj.GetComponentInChildren<Text>().text = potion.count.ToString();
+            }
             obj.GetComponent<Image>().sprite = item.img;
             list_inventory.Add(obj);
         }

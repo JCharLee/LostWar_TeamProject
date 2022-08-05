@@ -25,7 +25,6 @@ public class FadeScene : MonoBehaviour
     {
         if (fadeCg.alpha == 0)
         {
-            Debug.Log("fade out");
             float rate = 1.0f / fadeDuration;
             float progress = 0.0f;
             while (progress <= 1.0f)
@@ -57,7 +56,6 @@ public class FadeScene : MonoBehaviour
         }
         else if (fadeCg.alpha == 1)
         {
-            Debug.Log("fade in");
             float rate = 1.0f / fadeDuration;
             float progress = 0.0f;
             while (progress <= 1f)

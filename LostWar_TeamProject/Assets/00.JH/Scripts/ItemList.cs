@@ -10,6 +10,7 @@ namespace ItemSpace
         [SerializeField] private List<string> Shoes;
         [SerializeField] private List<string> Top;
         [SerializeField] private List<string> Bottoms;
+        [SerializeField] private List<string> Potions;
         [SerializeField] private Sprite[] itemImage;
         public static ItemList instance;
         private void Awake()
@@ -18,9 +19,11 @@ namespace ItemSpace
             Shoes = new List<string>();
             Top = new List<string>();
             Bottoms = new List<string>();
+            Potions = new List<string>();
             Init_Shoes();
             Init_Top();
             Init_Bottoms();
+            Init_Potions();
         }
 
         private void Init_Bottoms()// 하의 아이템 리스트
@@ -40,6 +43,13 @@ namespace ItemSpace
             Shoes.Add("Boots");
             Shoes.Add("Sneakers");
         }
+
+        private void Init_Potions()
+        {
+            Potions.Add("HP Potion");
+            Potions.Add("SP Potion");
+        }
+
         public Item Get(string _name)// 아이템 스탯 무작위 지정
         {
             switch (_name)
@@ -69,6 +79,10 @@ namespace ItemSpace
                     return new Clothes("Pants", Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(10, 13), 3, ItemType.bottoms, itemImage[8]);
                 case "Jeans":
                     return new Clothes("Jeans", Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(10, 13), 3, ItemType.bottoms, itemImage[9]);
+                case "HP Potion":
+                    return new Potion("HP Potion", ItemType.potion, PotionType.HP, 500f, 5, itemImage[10]);
+                case "SP Potion":
+                    return new Potion("SP Potion", ItemType.potion, PotionType.SP, 50f, 5, itemImage[11]);
                 default:
                     return null;
             }
@@ -95,7 +109,7 @@ namespace ItemSpace
                     item[0] = null;
                     break;
             }
-            randint = Random.Range(0, 8);
+            randint = Random.Range(0, 9);
             switch (randint)// 두 번째 아이템 드랍률
             {
                 case 0:
@@ -116,11 +130,17 @@ namespace ItemSpace
                 case 5:
                     item[1] = new Clothes("Jeans", Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(7, 10), 3, ItemType.bottoms, itemImage[9]);
                     break;
+                case 6:
+                    item[1] = new Potion("HP Potion", ItemType.potion, PotionType.HP, 500f, Random.Range(1, 3), itemImage[10]);
+                    break;
+                case 7:
+                    item[1] = new Potion("SP Potion", ItemType.potion, PotionType.SP, 50f, Random.Range(1, 3), itemImage[11]);
+                    break;
                 default:
                     item[1] = null;
                     break;
             }
-            randint = Random.Range(0, 8);
+            randint = Random.Range(0, 9);
             switch (randint)// 세 번째 아이템 드랍률
             {
                 case 0:
@@ -140,6 +160,12 @@ namespace ItemSpace
                     break;
                 case 5:
                     item[2] = new Clothes("Jeans", Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3), Random.Range(7, 10), 3, ItemType.bottoms, itemImage[9]);
+                    break;
+                case 6:
+                    item[2] = new Potion("HP Potion", ItemType.potion, PotionType.HP, 500f, Random.Range(1, 3), itemImage[10]);
+                    break;
+                case 7:
+                    item[2] = new Potion("SP Potion", ItemType.potion, PotionType.SP, 50f, Random.Range(1, 3), itemImage[11]);
                     break;
                 default:
                     item[2] = null;

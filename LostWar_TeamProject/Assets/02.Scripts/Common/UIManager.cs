@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text def;
     [SerializeField] private Text hp;
     [SerializeField] private Text sp;
-    private bool inventoryOn = false;
+    public bool inventoryOn = false;
 
     public GameObject fadeObject;
 
@@ -349,6 +349,12 @@ public class UIManager : MonoBehaviour
             if (items[i] != null)
             {
                 dropPrefab[i] = Instantiate(Resources.Load<GameObject>("Prefabs/DroppedItem"), dropPanel.transform);
+                if (items[i].itemType == ItemType.potion)
+                {
+                    Potion potion = items[i] as Potion;
+                    dropPrefab[i].transform.GetChild(0).GetComponentInChildren<Text>().enabled = true;
+                    dropPrefab[i].transform.GetChild(0).GetComponentInChildren<Text>().text = potion.count.ToString();
+                }
                 dropPrefab[i].transform.GetChild(0).GetComponent<Image>().sprite = items[i].img;
                 dropPrefab[i].transform.GetChild(1).GetComponent<Text>().text = items[i].name;
                 dropPrefab[i].GetComponent<GetDropItem>().itemIdx = i;
@@ -398,6 +404,7 @@ public class UIManager : MonoBehaviour
 
         Weapon weapon;
         Clothes clothes;
+        Potion potion;
         if (item.itemType == ItemType.shortWeapon || item.itemType == ItemType.longWeapon)
         {
             weapon = item as Weapon;
@@ -407,6 +414,13 @@ public class UIManager : MonoBehaviour
                                 $"AGI : {item.agi}\n" +
                                 $"CON : {item.con}\n" +
                                 $"VIT : {item.vit}";
+        }
+        else if (item.itemType == ItemType.potion)
+        {
+            potion = item as Potion;
+            itemInfoText.text = $"<{item.name}>\n\n" +
+                                $"FILL : +{potion.amount}\n" +
+                                $"NUM : {potion.count}";
         }
         else
         {

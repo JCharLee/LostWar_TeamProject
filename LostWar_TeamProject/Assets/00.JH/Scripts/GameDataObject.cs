@@ -48,6 +48,7 @@ public class GameDataObject : ScriptableObject
     public List<Item> shoes = new List<Item>();// 신발 리스트
     public List<Item> top = new List<Item>();// 상의 리스트
     public List<Item> bottoms = new List<Item>();// 하의 리스트
+    public List<Item> potion = new List<Item>();
     //현재 장착중인 아이템들
     public Weapon shortWeapon_C;// 현재 근거리 무기
     public Weapon longWeapon_C;// 현재 장거리 무기
