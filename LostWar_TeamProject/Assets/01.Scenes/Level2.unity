@@ -8049,6 +8049,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transferMapName: Level3
+  questId: 80
 --- !u!1 &343112971
 GameObject:
   m_ObjectHideFlags: 0
