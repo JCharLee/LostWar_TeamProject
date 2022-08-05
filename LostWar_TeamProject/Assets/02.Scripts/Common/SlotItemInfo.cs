@@ -22,7 +22,6 @@ public class SlotItemInfo : MonoBehaviour, IPointerClickHandler
 
     private void Update()
     {
-        Debug.Log("updating");
         if (item.itemType == ItemType.potion)
         {
             if (UIManager.instance.inventoryOn)
