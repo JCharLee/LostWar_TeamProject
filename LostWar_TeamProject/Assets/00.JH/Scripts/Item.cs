@@ -71,7 +71,17 @@ namespace ItemSpace
 
         public void Use()
         {
-            Debug.Log($"Heal +{amount}");
+            switch (potionType)
+            {
+                case PotionType.HP:
+                    Debug.Log($"Hp +{amount}");
+                    GameManager.instance.gameDataObject.Hp += amount;
+                    break;
+                case PotionType.SP:
+                    Debug.Log($"Sp +{amount}");
+                    GameManager.instance.gameDataObject.Sp += amount;
+                    break;
+            }
             count--;
         }
     }

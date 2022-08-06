@@ -178,6 +178,11 @@ public class UIManager : MonoBehaviour
             if (basicBehaviour.IsMoving())
                 CloseDropPanel();
 
+        hpBar.fillAmount = (gameDataObject.Hp / gameDataObject.MaxHp);
+        hpAmount.text = $"{gameDataObject.Hp} / {gameDataObject.MaxHp}";
+        spBar.fillAmount = (gameDataObject.Sp / gameDataObject.MaxSp);
+        spAmount.text = $"{gameDataObject.Sp} / {gameDataObject.MaxSp}";
+
         str.text = $"STR : {gameDataObject.Str}";
         agi.text = $"AGI : {gameDataObject.Agi}";
         con.text = $"CON : {gameDataObject.Con}";
@@ -331,6 +336,20 @@ public class UIManager : MonoBehaviour
     {
         gameDataObject.Exp += exp;
         expBar.fillAmount = gameDataObject.Exp / gameDataObject.Exp_require;
+    }
+    #endregion
+
+    #region [플레이어 HP/SP]
+    public void DisplayHpBar()
+    {
+        hpBar.fillAmount = (gameDataObject.Hp / gameDataObject.MaxHp);
+        hpAmount.text = $"{gameDataObject.Hp} / {gameDataObject.MaxHp}";
+    }
+
+    public void DisplaySpBar()
+    {
+        spBar.fillAmount = (gameDataObject.Sp / gameDataObject.MaxSp);
+        spAmount.text = $"{gameDataObject.Sp} / {gameDataObject.MaxSp}";
     }
     #endregion
 

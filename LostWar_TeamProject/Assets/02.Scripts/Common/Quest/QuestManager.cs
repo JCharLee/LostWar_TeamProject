@@ -56,10 +56,10 @@ public class QuestManager : MonoBehaviour
     {
         // 메인 퀘스트
         questList.Add(0, new QuestData("시작", "게임 스타트", new int[] { 0 }, true, 1, GoalType.TALK, 0f));
-        questList.Add(10, new QuestData("아파트 탈출", "장비를 찾아서 챙긴다.", new int[] { 0, 0 }, true, 3, GoalType.GATHERING, 5f));
-        questList.Add(20, new QuestData("아파트 탈출", "집 밖으로 나가자.", new int[] { 0, 0 }, true, 1, GoalType.LOCATION, 5f));
-        questList.Add(30, new QuestData("아파트 탈출", "출몰하는 적 처치", new int[] { 0, 0 }, true, 10, GoalType.KILL, 5f));
-        questList.Add(40, new QuestData("아파트 탈출", "건물을 빠져나간다.", new int[] { 0, 0 }, true, 1, GoalType.LOCATION, 5f));
+        questList.Add(10, new QuestData("아파트 탈출", "장비를 찾아서 챙긴다.", new int[] { 0, 0 }, true, 3, GoalType.GATHERING, 10f));
+        questList.Add(20, new QuestData("아파트 탈출", "집 밖으로 나가자.", new int[] { 0, 0 }, true, 1, GoalType.LOCATION, 10f));
+        questList.Add(30, new QuestData("아파트 탈출", "출몰하는 적 처치", new int[] { 0, 0 }, true, 10, GoalType.KILL, 30f));
+        questList.Add(40, new QuestData("아파트 탈출", "건물을 빠져나간다.", new int[] { 0, 0 }, true, 1, GoalType.LOCATION, 10f));
 
         questList.Add(50, new QuestData("가족의 행방을 찾아서", "캠프로 이동해서 정보를 얻는다.", new int[] { 2000 }, true, 1, GoalType.TALK, 5f));
         questList.Add(60, new QuestData("가족의 행방을 찾아서", "단장에게 말을 건다.", new int[] { 3000 }, true, 1, GoalType.TALK, 5f));
@@ -93,9 +93,9 @@ public class QuestManager : MonoBehaviour
 
     void NextMainQuest()
     {
+        uiManager.UpdateExp(questList[questId].ExpReward);
         questId += 10;
         questActionIdx = 0;
-        uiManager.UpdateExp(questList[questId].ExpReward);
 
         questData = questList[questId];
         player.QuestData = questData;

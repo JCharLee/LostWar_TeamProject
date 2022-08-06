@@ -56,7 +56,28 @@ public class GetDropItem : MonoBehaviour
         }
         else if (uiManager.items[itemIdx].itemType == ItemType.potion)
         {
-            gameDataObject.potion.Add(uiManager.items[itemIdx]);
+            Potion newPotion = uiManager.items[itemIdx] as Potion;
+            switch (newPotion.potionType)
+            {
+                case PotionType.HP:
+                    if (gameDataObject.hpPotion.Contains(gameDataObject.hpPotion.Find(x => x.name == "HP Potion")))
+                    {
+                        Potion curPotion = gameDataObject.hpPotion.Find(x => x.name == "HP Potion") as Potion;
+                        curPotion.count += newPotion.count;
+                    }
+                    else
+                        gameDataObject.hpPotion.Add(uiManager.items[itemIdx]);
+                    break;
+                case PotionType.SP:
+                    if (gameDataObject.spPotion.Contains(gameDataObject.hpPotion.Find(x => x.name == "SP Potion")))
+                    {
+                        Potion curPotion = gameDataObject.spPotion.Find(x => x.name == "SP Potion") as Potion;
+                        curPotion.count += newPotion.count;
+                    }
+                    else
+                        gameDataObject.spPotion.Add(uiManager.items[itemIdx]);
+                    break;
+            }
             uiManager.items[itemIdx] = null;
         }
 

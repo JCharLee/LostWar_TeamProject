@@ -6,7 +6,6 @@ using ItemSpace;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameDataObject gameDataObject;
     [SerializeField] private Transform[] itemSlots;
     [SerializeField] private Transform equiped_shortWeapon;
     [SerializeField] private Transform equiped_longWeapon;
@@ -22,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     private MoveBehaviour moveBehaviour;
     public static GameManager instance;
+
+    public GameDataObject gameDataObject;
 
     private void Awake()
     {
@@ -49,6 +50,8 @@ public class GameManager : MonoBehaviour
         top_C = null;
         bottoms_C = null;
 
+        gameDataObject.Hp = gameDataObject.MaxHp;
+
         Reset();
     }
 
@@ -59,7 +62,8 @@ public class GameManager : MonoBehaviour
         gameDataObject.shoes.Clear();
         gameDataObject.top.Clear();
         gameDataObject.bottoms.Clear();
-        gameDataObject.potion.Clear();
+        gameDataObject.hpPotion.Clear();
+        gameDataObject.spPotion.Clear();
 
         gameDataObject.shortWeapon_C = null;
         gameDataObject.longWeapon_C = null;
@@ -69,15 +73,15 @@ public class GameManager : MonoBehaviour
 
         gameDataObject.Level = 1;
         gameDataObject.Exp = 0;
-        gameDataObject.Exp_require = 10;
+        gameDataObject.Exp_require = 100;
 
-        gameDataObject.Str = 0;
-        gameDataObject.Agi = 0;
-        gameDataObject.Con = 0;
-        gameDataObject.Vit = 0;
+        gameDataObject.Str = 5;
+        gameDataObject.Agi = 5;
+        gameDataObject.Con = 5;
+        gameDataObject.Vit = 5;
         gameDataObject.Status_own = 7;
         gameDataObject.MaxHp = 1000;
-        gameDataObject.Hp = 1000;
+        gameDataObject.Hp = gameDataObject.MaxHp;
         gameDataObject.MaxSp = 100;
         gameDataObject.Sp = 100;
         gameDataObject.Dam = 5;
@@ -92,7 +96,8 @@ public class GameManager : MonoBehaviour
         AddInventory(gameDataObject.shoes);
         AddInventory(gameDataObject.top);
         AddInventory(gameDataObject.bottoms);
-        AddInventory(gameDataObject.potion);
+        AddInventory(gameDataObject.hpPotion);
+        AddInventory(gameDataObject.spPotion);
         shortWeapon_C = AddEquip(equiped_shortWeapon, gameDataObject.shortWeapon_C);
         longWeapon_C = AddEquip(equiped_longWeapon, gameDataObject.longWeapon_C);
         shoes_C = AddEquip(equiped_shoes, gameDataObject.shoes_C);
@@ -167,6 +172,7 @@ public class GameManager : MonoBehaviour
                 gameDataObject.Agi += SlotItemInfo.instance.item.agi;
                 gameDataObject.Con += SlotItemInfo.instance.item.con;
                 gameDataObject.Vit += SlotItemInfo.instance.item.vit;
+                SetState(true, SlotItemInfo.instance.item.str, SlotItemInfo.instance.item.agi, SlotItemInfo.instance.item.con, SlotItemInfo.instance.item.vit);
                 weapon = SlotItemInfo.instance.item as Weapon;
                 gameDataObject.Dam += weapon.damage;
                 gameDataObject.shortWeapon.Remove(SlotItemInfo.instance.item);
@@ -184,6 +190,7 @@ public class GameManager : MonoBehaviour
                 gameDataObject.Agi += SlotItemInfo.instance.item.agi;
                 gameDataObject.Con += SlotItemInfo.instance.item.con;
                 gameDataObject.Vit += SlotItemInfo.instance.item.vit;
+                SetState(true, SlotItemInfo.instance.item.str, SlotItemInfo.instance.item.agi, SlotItemInfo.instance.item.con, SlotItemInfo.instance.item.vit);
                 weapon = SlotItemInfo.instance.item as Weapon;
                 gameDataObject.Dam += weapon.damage;
                 gameDataObject.longWeapon.Remove(SlotItemInfo.instance.item);
@@ -201,6 +208,7 @@ public class GameManager : MonoBehaviour
                 gameDataObject.Agi += SlotItemInfo.instance.item.agi;
                 gameDataObject.Con += SlotItemInfo.instance.item.con;
                 gameDataObject.Vit += SlotItemInfo.instance.item.vit;
+                SetState(true, SlotItemInfo.instance.item.str, SlotItemInfo.instance.item.agi, SlotItemInfo.instance.item.con, SlotItemInfo.instance.item.vit);
                 clothes = SlotItemInfo.instance.item as Clothes;
                 gameDataObject.Def += clothes.def;
                 gameDataObject.shoes.Remove(SlotItemInfo.instance.item);
@@ -216,6 +224,7 @@ public class GameManager : MonoBehaviour
                 gameDataObject.Agi += SlotItemInfo.instance.item.agi;
                 gameDataObject.Con += SlotItemInfo.instance.item.con;
                 gameDataObject.Vit += SlotItemInfo.instance.item.vit;
+                SetState(true, SlotItemInfo.instance.item.str, SlotItemInfo.instance.item.agi, SlotItemInfo.instance.item.con, SlotItemInfo.instance.item.vit);
                 clothes = SlotItemInfo.instance.item as Clothes;
                 gameDataObject.Def += clothes.def;
                 gameDataObject.top.Remove(SlotItemInfo.instance.item);
@@ -231,6 +240,7 @@ public class GameManager : MonoBehaviour
                 gameDataObject.Agi += SlotItemInfo.instance.item.agi;
                 gameDataObject.Con += SlotItemInfo.instance.item.con;
                 gameDataObject.Vit += SlotItemInfo.instance.item.vit;
+                SetState(true, SlotItemInfo.instance.item.str, SlotItemInfo.instance.item.agi, SlotItemInfo.instance.item.con, SlotItemInfo.instance.item.vit);
                 clothes = SlotItemInfo.instance.item as Clothes;
                 gameDataObject.Def += clothes.def;
                 gameDataObject.bottoms.Remove(SlotItemInfo.instance.item);
@@ -258,6 +268,7 @@ public class GameManager : MonoBehaviour
         gameDataObject.Agi -= temp.item.agi;
         gameDataObject.Con -= temp.item.con;
         gameDataObject.Vit -= temp.item.vit;
+        SetState(false, temp.item.str, temp.item.agi, temp.item.con, temp.item.vit);
 
         if (item_c.itemType == ItemType.shortWeapon || item_c.itemType == ItemType.longWeapon)
         {
@@ -268,6 +279,24 @@ public class GameManager : MonoBehaviour
         {
             Clothes clothes = temp.item as Clothes;
             gameDataObject.Def -= clothes.def;
+        }
+    }
+
+    public void SetState(bool set, int str, int agi, int con, int vit)
+    {
+        if (set)
+        {
+            gameDataObject.MaxHp += (((float)str * 10f) + ((float)con * 50f));
+            gameDataObject.MaxSp += (((float)con * 10f) + ((float)vit * 20f));
+            gameDataObject.Dam += (((float)str * 5f) + ((float)agi * 2f));
+            gameDataObject.Def += (((float)str * 2f) + ((float)con * 5f));
+        }
+        else
+        {
+            gameDataObject.MaxHp -= (((float)str * 10f) + ((float)con * 50f));
+            gameDataObject.MaxSp -= (((float)con * 10f) + ((float)vit * 20f));
+            gameDataObject.Dam -= (((float)str * 5f) + ((float)agi * 2f));
+            gameDataObject.Def -= (((float)str * 2f) + ((float)con * 5f));
         }
     }
 

@@ -30,7 +30,15 @@ public class SlotItemInfo : MonoBehaviour, IPointerClickHandler
                 cnt.text = potion.count.ToString();
                 if (potion.count <= 0)
                 {
-                    gameDataObject.potion.Remove(potion);
+                    switch (potion.potionType)
+                    {
+                        case PotionType.HP:
+                            gameDataObject.hpPotion.Remove(potion);
+                            break;
+                        case PotionType.SP:
+                            gameDataObject.spPotion.Remove(potion);
+                            break;
+                    }
                     item = null;
                     Destroy(gameObject);
                     return;
@@ -55,7 +63,22 @@ public class SlotItemInfo : MonoBehaviour, IPointerClickHandler
                 GameManager.instance.OnDoubleClickEquipOff();
 
             if (item.itemType == ItemType.potion)
+            {
+                if (GameManager.instance.gameDataObject.Hp >= GameManager.instance.gameDataObject.MaxHp)
+                {
+                    switch (potion.potionType)
+                    {
+                        case PotionType.HP:
+                            StartCoroutine(UIManager.instance.NoticeText(false, "이미 체력이 가득 차 있습니다."));
+                            break;
+                        case PotionType.SP:
+                            StartCoroutine(UIManager.instance.NoticeText(false, "이미 기력이 가득 차 있습니다."));
+                            break;
+                    }
+                    return;
+                }
                 potion.Use();
+            }
         }
         else
             clickTime = Time.time;

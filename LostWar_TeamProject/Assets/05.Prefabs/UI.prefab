@@ -1171,7 +1171,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1000 / 1000
+  m_Text: 0 / 0
 --- !u!114 &315739839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7039,7 +7039,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100 / 100
+  m_Text: 0 / 0
 --- !u!114 &1535236898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9847,6 +9847,7 @@ MonoBehaviour:
   def: {fileID: 0}
   hp: {fileID: 0}
   sp: {fileID: 0}
+  inventoryOn: 0
   fadeObject: {fileID: 0}
   gameDataObject: {fileID: 11400000, guid: 278d03e05c3cb73479d91da37829febd, type: 2}
 --- !u!1 &6986917482734760352
