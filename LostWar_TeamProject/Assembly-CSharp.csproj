@@ -133,7 +133,6 @@
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleCollision.cs" />
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleExamples.cs" />
     <Compile Include="Assets\08.Effect\Shared\Scripts\ParticleMenu.cs" />
-    <Compile Include="Assets\EffectExamples\TutorialInfo\Scripts\Readme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\00.JH\Models\Modern Guns - Handgun\README.txt" />
